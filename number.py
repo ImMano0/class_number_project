@@ -9,7 +9,7 @@ class Number:
 
         returns: int
         """
-        pass
+        return self.value
 
     def is_odd(self):
         """
@@ -18,7 +18,7 @@ class Number:
         returns: bool
 
         """
-        pass
+        return self.value % 2 != 0 
 
     def is_even(self):
         """
@@ -26,7 +26,7 @@ class Number:
 
         returns: bool
         """
-        pass
+        return self.value % 2 == 0
 
     def is_prime(self):
         """
@@ -34,7 +34,7 @@ class Number:
 
         returns: bool
         """
-        pass
+        return len(self.get_divisors()) == 2 
 
     def get_divisors(self):
         """
@@ -42,15 +42,20 @@ class Number:
 
         returns: list
         """
-        pass
-
+        divisors = []
+        for i in range(1, self.value + 1):
+            if self.value % i == 0:
+                divisors.append(i)
+        return divisors 
+        
     def get_length(self):
         """
         Returns the number of digits in the number.
 
         returns: int
         """
-        pass
+        m = len(str(self.value))
+        return m 
 
     def get_sum(self):
         """
@@ -135,3 +140,10 @@ class Number:
 
 # Create a new instance of Number
 number = Number(3)
+
+print(number.get_number())
+print(number.is_odd())
+print(number.is_even())
+print(number.is_prime())
+print(number.get_divisors())
+print(number.get_length())
