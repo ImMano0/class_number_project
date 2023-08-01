@@ -18,8 +18,7 @@ class Number:
         returns: bool
 
         """
-        return self.value % 2 != 0 
-
+        return self.value % 2 == 1
     def is_even(self):
         """
         Returns True if the number is even, otherwise False. 
@@ -34,28 +33,32 @@ class Number:
 
         returns: bool
         """
-        return len(self.get_divisors()) == 2 
-
+        if self.value < 2:
+            return False
+        for i in range(2, self.value):
+            if self.value % i == 0:
+                return False
+        
+        return True
     def get_divisors(self):
         """
         Returns a list of all the divisors of the number.
 
         returns: list
         """
-        divisors = []
+        ans = []
         for i in range(1, self.value + 1):
             if self.value % i == 0:
-                divisors.append(i)
-        return divisors 
-        
+                ans.append(i)
+        return ans            
     def get_length(self):
         """
         Returns the number of digits in the number.
 
         returns: int
         """
-        m = len(str(self.value))
-        return m 
+        return len(self.get_digits())
+
 
     def get_sum(self):
         """
@@ -63,7 +66,7 @@ class Number:
 
         returns: int
         """
-        pass
+        return sum(self.get_digits())
 
     def get_reverse(self):
         """
@@ -71,7 +74,7 @@ class Number:
 
         returns: int
         """
-        pass
+        return int(str(self.value)[::-1])
 
     def is_palindrome(self):
         """
@@ -79,7 +82,8 @@ class Number:
 
         returns: bool
         """
-        pass
+        c = str(self.value)[::-1]
+        return c==str(self.value)
 
     def get_digits(self):
         """
@@ -87,7 +91,16 @@ class Number:
 
         returns: list
         """
-        pass
+        value = self.value  # 45315 -> 5, 1, 3, 5, 4
+        digits = []
+
+        while value != 0:
+            d = value % 10  # Get the last digit
+            value //= 10  # Remove the last digit
+
+            digits.append(d)  # Add the last digit to the list
+
+        return digits
 
     def get_max(self):
         """
@@ -95,7 +108,8 @@ class Number:
 
         returns: int
         """
-        pass
+        return max(self.get_digits())
+        
 
     def get_min(self):
         """
@@ -103,7 +117,7 @@ class Number:
 
         returns: int
         """
-        pass
+        return min(self.get_digits())
 
     def get_average(self):
         """
@@ -111,7 +125,7 @@ class Number:
 
         returns: float
         """
-        pass
+        return self.get_sum() / self.get_length()
 
     def get_median(self):
         """
@@ -119,7 +133,19 @@ class Number:
 
         returns: float
         """
-        pass
+        digits = [int(digit) for digit in str(self.value)]  # Extract digits
+        sorted_digits = sorted(digits)  # Sort the digits
+        length = len(sorted_digits)
+    
+    # Find the median
+        if length % 2 == 0:  # If the length is even
+            mid = length // 2  # Find the middle index
+            median = (sorted_digits[mid - 1] + sorted_digits[mid]) / 2
+        else:  # If the length is odd
+            mid = length // 2  # Find the middle index
+            median = sorted_digits[mid]
+    
+        return median
 
     def get_range(self):
         """
@@ -127,7 +153,7 @@ class Number:
 
         returns: list
         """
-        pass
+        return [self.get_min(), self.get_max()]
 
     def get_frequency(self):
         """
@@ -135,15 +161,39 @@ class Number:
 
         returns: dict
         """
-        pass
+        # Convert number to a list of digits
+        digits = [int(digit) for digit in str(self.value)]
     
+    # Initialize an empty dictionary for frequencies
+        frequency_dict = {}
+    
+    # Count the frequency of each digit using a loop
+        for digit in digits:
+            if digit in frequency_dict:
+                frequency_dict[digit] += 1
+            else:
+                frequency_dict[digit] = 1
+    
+        return frequency_dict
 
 # Create a new instance of Number
-number = Number(3)
 
+number = Number(3)
+print(number.get_digits())
 print(number.get_number())
 print(number.is_odd())
 print(number.is_even())
 print(number.is_prime())
 print(number.get_divisors())
+#print(number.get_digits())
 print(number.get_length())
+print(number.get_sum())
+print(number.get_reverse())
+print(number.is_palindrome())
+print(number.get_digits())
+print(number.get_max())
+print(number.get_min())
+print(number.get_average())
+print(number.get_median())
+print(number.get_range())
+print(number.get_frequency())
